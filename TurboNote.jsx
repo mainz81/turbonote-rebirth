@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Button } from "./src/components/ui/button";
+import { Card, CardContent } from "./src/components/ui/card";
+import { Input } from "./src/components/ui/input";
 
 export default function TurboNote() {
   const [note, setNote] = useState('');
