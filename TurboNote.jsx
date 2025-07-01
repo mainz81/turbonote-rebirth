@@ -1,45 +1,43 @@
-import { useState } from 'react';
-import { Button } from "./src/components/ui/button";
-import { Card, CardContent } from "./src/components/ui/card";
-import { Input } from "./src/components/ui/input";
+import React, { useState } from 'react';
+import { Button } from './components/ui/button';
+import { Input } from './components/ui/input';
+import { Card } from './components/ui/card';
 
 export default function TurboNote() {
-  const [note, setNote] = useState('');
-  const [log, setLog] = useState([]);
+  const [notes, setNotes] = useState([]);
+  const [noteInput, setNoteInput] = useState('');
 
-  const handleSave = () => {
-    if (note.trim()) {
-      setLog([note, ...log]);
-      setNote('');
+  const addNote = () => {
+    if (noteInput.trim() !== '') {
+      setNotes([...notes, noteInput]);
+      setNoteInput('');
     }
   };
 
   return (
-    <div className="flex flex-col items-center p-8 space-y-4">
-      <h1 className="text-2xl font-bold">🌀 TurboNote</h1>
-      <Input
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-        placeholder="Type your quick thought..."
-        className="w-full max-w-md"
-        onKeyDown={(e) => { if (e.key === 'Enter') handleSave(); }}
-      />
-      <Button onClick={handleSave} className="w-full max-w-md">
-        Save Note
-      </Button>
-      <Card className="w-full max-w-md mt-6">
-        <CardContent className="space-y-2 p-4">
-          <h2 className="font-semibold text-lg">📜 Saved Notes</h2>
-          {log.length === 0 ? (
-            <p className="text-sm text-muted">No notes yet.</p>
-          ) : (
-            <ul className="list-disc pl-5">
-              {log.map((entry, idx) => (
-                <li key={idx}>{entry}</li>
-              ))}
-            </ul>
-          )}
-        </CardContent>
+    <div className="app" style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      <h1>TurboNote ⚡</h1>
+
+      <Card style={{ padding: '1rem', marginBottom: '1rem' }}>
+        <Input
+          value={noteInput}
+          onChange={(e) => setNoteInput(e.target.value)}
+          placeholder="Write a sacred note..."
+        />
+        <Button onClick={addNote} style={{ marginTop: '0.5rem' }}>
+          Add Note
+        </Button>
+      </Card>
+
+      <Card style={{ padding: '1rem' }}>
+        <h2>Your Divine Notes</h2>
+        <ul>
+          {notes.map((note, index) => (
+            <li key={index} style={{ margin: '0.5rem 0' }}>
+              {note}
+            </li>
+          ))}
+        </ul>
       </Card>
     </div>
   );
