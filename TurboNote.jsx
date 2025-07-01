@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 
 export default function TurboNote() {
   const [note, setNote] = useState('');
-  const [log, setLog] = useState([]);
+  const [log, setLog] = useState<string[]>([]);
 
   const handleSave = () => {
     if (note.trim()) {
